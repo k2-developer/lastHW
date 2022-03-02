@@ -12,6 +12,13 @@ public class IssueManager {
 
     private IssueRepository issueRepository;
 
+    public IssueManager(IssueRepository issueRepository) {
+        this.issueRepository = issueRepository;
+    }
+
+    public IssueManager() {
+    }
+
     public List<Issue> showOpen(){
         List<Issue> tmp = new ArrayList<>();
         for (Issue issue : issueRepository.getAll()){
@@ -32,4 +39,10 @@ public class IssueManager {
         }
         return tmp;
     }
+
+    public void add(Issue issue){
+        issueRepository.add(issue);
+    }
+
+
 }

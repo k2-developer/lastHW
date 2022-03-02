@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class IssueManagerTest {
 
     private final IssueRepository issueRepository = new IssueRepository();
-    private final IssueManager issueManager = new IssueManager();
+    private final IssueManager issueManager = new IssueManager(issueRepository);
 
     private final Issue issue1 = new Issue(1, "title1", new Author(1, "q1"), new Assignee(1, "a1", "a11"), new Label(1, "z1", "x1", "C1"), Status.OPEN);
     private final Issue issue2 = new Issue(2, "title2", new Author(2, "q2"), new Assignee(2, "a2", "a22"), new Label(2, "z2", "x2", "C2"), Status.CLOSED);
@@ -23,17 +23,17 @@ class IssueManagerTest {
 
     @BeforeEach()
     void setUp() {
-        issueRepository.add(issue1);
-        issueRepository.add(issue2);
-        issueRepository.add(issue3);
-        issueRepository.add(issue4);
-        issueRepository.add(issue5);
+        issueManager.add(issue1);
+        issueManager.add(issue2);
+        issueManager.add(issue3);
+        issueManager.add(issue4);
+        issueManager.add(issue5);
     }
 
     @Test
     void shouldShowOpen(){
         List<Issue> actual = issueManager.showOpen();
-        List<Issue> expected = Arrays.asList(issue1,issue2,issue5);
+        List<Issue> expected = Arrays.asList(issue1,issue4);
         assertEquals(expected,actual);
     }
 
